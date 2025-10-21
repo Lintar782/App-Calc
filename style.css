@@ -1,0 +1,396 @@
+:root {
+    /* Light Theme */
+    --color-primary: #FF9F43; /* Oranye */
+    --color-secondary: #A3E4D7; /* Hijau Mint */
+    --color-bg-main: #F7F9FC; /* Abu-abu muda */
+    --color-bg-calc: #FFFFFF;
+    --color-text-main: #2C3E50;
+    --color-text-secondary: #7F8C8D;
+    --color-btn-number-bg: #EAECEE;
+    --color-btn-operator-bg: var(--color-primary);
+    --color-btn-operator-text: white;
+    --color-btn-equals-bg: #43A047; /* Sedikit berbeda dari primary agar menonjol */
+    --color-btn-equals-glow: #1976D2; /* Biru untuk pulse */
+    --shadow-soft: rgba(0, 0, 0, 0.08) 0px 4px 12px;
+    --shadow-inset-click: inset 0 2px 4px rgba(0, 0, 0, 0.15);
+    --transition-duration: 0.15s;
+    --transition-color: 0.3s ease;
+}
+
+/* Dark Theme */
+.dark-mode {
+    --color-primary: #FFB74D;
+    --color-secondary: #66BB6A;
+    --color-bg-main: #0F1724;
+    --color-bg-calc: #1D293A;
+    --color-text-main: #E6EEF8;
+    --color-text-secondary: #9BA9B9;
+    --color-btn-number-bg: #2C3E50;
+    --color-btn-operator-bg: #E65100;
+    --color-btn-operator-text: white;
+    --color-btn-equals-bg: #66BB6A;
+    --color-btn-equals-glow: #2196F3;
+    --shadow-soft: rgba(255, 255, 255, 0.08) 0px 4px 12px;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: var(--color-bg-main);
+    color: var(--color-text-main);
+    transition: background-color var(--transition-color), color var(--transition-color);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* ---------------------------------- */
+/* Header */
+/* ---------------------------------- */
+.sticky-header {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    background-color: var(--color-bg-calc);
+    padding: 1rem 5vw;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: var(--shadow-soft);
+    transition: background-color var(--transition-color);
+}
+
+.logo {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--color-primary);
+}
+
+.theme-toggle {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    transition: transform var(--transition-duration);
+}
+
+.theme-toggle:hover {
+    transform: scale(1.1);
+}
+
+/* ---------------------------------- */
+/* Kalkulator Layout (Main) */
+/* ---------------------------------- */
+.calculator-container {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 2rem 5vw;
+    flex-grow: 1;
+}
+
+.calculator {
+    background-color: var(--color-bg-calc);
+    border-radius: 1.5rem;
+    padding: 1.5rem;
+    box-shadow: var(--shadow-soft);
+    width: 100%;
+    max-width: 400px; /* Lebar maksimum desktop/tablet */
+    transition: background-color var(--transition-color);
+}
+
+/* ---------------------------------- */
+/* Display Area */
+/* ---------------------------------- */
+.display-area {
+    margin-bottom: 1rem;
+    text-align: right;
+    padding: 1rem;
+    border-radius: 1rem;
+    background-color: var(--color-bg-main);
+    overflow: hidden;
+    transition: background-color var(--transition-color);
+}
+
+.history-display {
+    font-size: 1rem;
+    color: var(--color-text-secondary);
+    min-height: 1.2em; /* Menjaga tinggi */
+    white-space: nowrap;
+    overflow-x: auto;
+    padding-bottom: 0.2rem;
+}
+
+.main-display {
+    font-size: 3rem;
+    font-weight: 500;
+    color: var(--color-text-main);
+    word-break: break-all;
+    min-height: 1.2em;
+}
+
+/* ---------------------------------- */
+/* Keypad (Buttons) */
+/* ---------------------------------- */
+.keypad {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0.75rem;
+}
+
+.btn {
+    font-family: inherit;
+    border: none;
+    border-radius: 1rem;
+    padding: 1.2rem 0;
+    font-size: 1.5rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: 
+        transform var(--transition-duration), 
+        box-shadow var(--transition-duration), 
+        background-color var(--transition-color),
+        color var(--transition-color);
+    outline: none; /* Dikelola oleh focus-visible */
+}
+
+/* Focus Visual untuk Aksesibilitas */
+.btn:focus-visible {
+    box-shadow: 0 0 0 3px var(--color-primary);
+}
+
+/* Hover & Klik Feedback */
+.btn:hover {
+    transform: translateY(-2px); /* Naik -4px disederhanakan agar tidak terlalu ekstrem */
+    box-shadow: var(--shadow-soft);
+}
+
+.btn:active {
+    transform: translateY(0);
+    box-shadow: var(--shadow-inset-click);
+}
+
+.span-two {
+    grid-column: span 2;
+}
+
+/* Button Colors */
+.btn-number {
+    background-color: var(--color-btn-number-bg);
+    color: var(--color-text-main);
+}
+
+.btn-secondary {
+    background-color: var(--color-secondary);
+    color: var(--color-text-main);
+}
+
+.btn-operator {
+    background-color: var(--color-primary);
+    color: var(--color-btn-operator-text);
+}
+
+.btn-equals {
+    background-color: var(--color-btn-equals-bg);
+    color: white;
+}
+
+/* Animation: Equals Button Pulse */
+@keyframes pulse-glow {
+    0% { box-shadow: 0 0 0 0 rgba(25, 118, 210, 0.4); }
+    70% { box-shadow: 0 0 0 15px rgba(25, 118, 210, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(25, 118, 210, 0); }
+}
+
+.btn-equals.pulsing {
+    animation: pulse-glow 0.8s ease-out;
+}
+
+/* Error Feedback */
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    20%, 60% { transform: translateX(-5px); }
+    40%, 80% { transform: translateX(5px); }
+}
+
+.display-area.error {
+    animation: shake 0.3s ease-in-out;
+    border: 2px solid #E74C3C;
+    background-color: #FADBD8;
+}
+
+.dark-mode .display-area.error {
+    background-color: #58181A;
+    border-color: #E74C3C;
+}
+
+
+/* ---------------------------------- */
+/* Riwayat Panel */
+/* ---------------------------------- */
+.history-panel {
+    margin-left: 2rem;
+    background-color: var(--color-bg-calc);
+    border-radius: 1.5rem;
+    padding: 1.5rem;
+    box-shadow: var(--shadow-soft);
+    width: 300px;
+    height: 650px; /* Tinggi agar sejajar dengan kalkulator */
+    display: flex;
+    flex-direction: column;
+    transition: background-color var(--transition-color);
+}
+
+.history-panel h2 {
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    border-bottom: 1px solid var(--color-bg-main);
+    padding-bottom: 0.5rem;
+}
+
+.history-list {
+    list-style: none;
+    overflow-y: auto;
+    flex-grow: 1;
+    padding-right: 5px;
+}
+
+.history-list::-webkit-scrollbar {
+    width: 5px;
+}
+
+.history-list::-webkit-scrollbar-thumb {
+    background-color: var(--color-text-secondary);
+    border-radius: 10px;
+}
+
+.history-item {
+    padding: 0.75rem 0.5rem;
+    margin-bottom: 0.5rem;
+    border-radius: 0.75rem;
+    background-color: var(--color-bg-main);
+    cursor: pointer;
+    transition: background-color var(--transition-duration);
+}
+
+.history-item:hover {
+    background-color: var(--color-secondary);
+}
+
+.history-item .expression {
+    font-size: 0.9rem;
+    color: var(--color-text-secondary);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.history-item .result {
+    font-size: 1.2rem;
+    font-weight: 500;
+    color: var(--color-text-main);
+}
+
+.empty-history-message {
+    color: var(--color-text-secondary);
+    font-size: 0.9rem;
+    text-align: center;
+    padding: 2rem 0;
+}
+
+/* ... CSS yang sudah ada ... */
+
+.history-panel h2 {
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    border-bottom: 1px solid var(--color-bg-main);
+    padding-bottom: 0.5rem;
+}
+
+/* Tambahan: Styling Tombol Hapus Riwayat */
+.btn-clear-history {
+    width: 100%;
+    padding: 0.5rem;
+    margin-bottom: 1rem;
+    border: none;
+    border-radius: 0.75rem;
+    background-color: #E74C3C; /* Merah untuk aksi destructif */
+    color: white;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color var(--transition-duration), transform var(--transition-duration), box-shadow var(--transition-duration);
+}
+
+.btn-clear-history:hover {
+    background-color: #C0392B;
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-soft);
+}
+
+.btn-clear-history:active {
+    transform: translateY(0);
+    box-shadow: var(--shadow-inset-click);
+}
+
+.dark-mode .btn-clear-history {
+    background-color: #9B0000;
+}
+
+/* ... CSS yang sudah ada ... */
+
+/* ---------------------------------- */
+/* Footer */
+/* ---------------------------------- */
+.footer {
+    font-size: 0.8rem; /* Font kecil */
+    color: var(--color-text-secondary); /* Warna abu-abu */
+    text-align: center; /* Center aligned */
+    padding: 1rem 0;
+    /* Background menyatu dengan halaman - tidak perlu box-shadow */
+}
+
+/* ---------------------------------- */
+/* Responsif (Mobile) */
+/* ---------------------------------- */
+@media (max-width: 768px) {
+    .calculator-container {
+        flex-direction: column;
+        align-items: center;
+        padding: 1rem;
+    }
+
+    .calculator {
+        width: 95vw;
+        max-width: none;
+        padding: 1rem;
+    }
+
+    .keypad {
+        gap: 0.5rem;
+    }
+
+    .btn {
+        padding: 1rem 0; /* Lebih kecil di mobile */
+        font-size: 1.3rem;
+    }
+
+    .main-display {
+        font-size: 2.5rem;
+    }
+
+    .history-panel {
+        margin-left: 0;
+        margin-top: 2rem;
+        width: 95vw;
+        max-width: none;
+        height: 250px; /* Lebih pendek di mobile */
+    }
+}

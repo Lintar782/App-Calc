@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SmartCalc - Kalkulator Modern</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header class="sticky-header">
+        <h1 class="logo">SmartCalc</h1>
+        <button class="theme-toggle" aria-label="Ganti mode gelap/terang">🌙</button>
+    </header>
+
+    <main class="calculator-container">
+        <div class="calculator">
+            <div class="display-area">
+                <div class="history-display" id="historyDisplay" aria-live="polite"></div>
+                <div class="main-display" id="mainDisplay" aria-live="assertive">0</div>
+            </div>
+
+            <div class="keypad">
+                <button class="btn btn-secondary" data-value="AC" aria-label="Clear All">AC</button>
+                <button class="btn btn-secondary" data-value="DEL" aria-label="Delete">DEL</button>
+                <button class="btn btn-secondary" data-value="%" aria-label="Persen">%</button>
+                <button class="btn btn-operator" data-value="/" aria-label="Bagi">÷</button>
+                
+                <button class="btn btn-number" data-value="7">7</button>
+                <button class="btn btn-number" data-value="8">8</button>
+                <button class="btn btn-number" data-value="9">9</button>
+                <button class="btn btn-operator" data-value="*" aria-label="Kali">×</button>
+
+                <button class="btn btn-number" data-value="4">4</button>
+                <button class="btn btn-number" data-value="5">5</button>
+                <button class="btn btn-number" data-value="6">6</button>
+                <button class="btn btn-operator" data-value="-" aria-label="Kurang">-</button>
+
+                <button class="btn btn-number" data-value="1">1</button>
+                <button class="btn btn-number" data-value="2">2</button>
+                <button class="btn btn-number" data-value="3">3</button>
+                <button class="btn btn-operator" data-value="+" aria-label="Tambah">+</button>
+
+                <button class="btn btn-number span-two" data-value="0">0</button>
+                <button class="btn btn-number" data-value="." aria-label="Titik Desimal">.</button>
+                <button class="btn btn-equals" data-value="=" aria-label="Hitung Sama Dengan">=</button>
+            </div>
+        </div>
+
+        <div class="history-panel">
+            <h2>Riwayat</h2>
+            <button class="btn-clear-history" id="clearHistoryBtn">Hapus Riwayat</button>
+            <ul class="history-list" id="historyList">
+                <li class="empty-history-message">Belum ada riwayat.</li>
+            </ul>
+        </div>
+
+    </main>
+    
+    
+    <footer class="footer">
+        © 2025 SmartCalc — Designed by Lintar
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
